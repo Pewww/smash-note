@@ -13,6 +13,12 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  button {
+    border: 0;
+    background-color: transparent;
+    outline: none;
+  }
+
   #root {
     height: 100%;
   }
