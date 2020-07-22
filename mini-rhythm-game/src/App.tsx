@@ -1,10 +1,30 @@
 import React from 'react';
+import routes from './routes';
+import {
+  Route,
+  Switch,
+  BrowserRouter as Router
+} from 'react-router-dom';
 
-function App() {
+const App = () => {
+  const routeList = routes.map(({
+    component: Comp,
+    ...route
+  }) => (
+    <Route
+      key={route.path}
+      {...route}
+      component={Comp}
+    />
+  ));
+
   return (
-    <div>
-      Hello
-    </div>
+    <Router>
+      <Switch>
+        {routeList}
+        {/* <Route component={Page404}/> */}
+      </Switch>
+    </Router>
   );
 }
 
