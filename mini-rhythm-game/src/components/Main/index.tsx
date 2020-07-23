@@ -52,7 +52,7 @@ const Main: React.FC<Props> = ({history}) => {
     if (isStarted) {
       setTimeout(() => {
         history.replace('/start');
-      }, 1 * SECOND);
+      }, 0.6 * SECOND);
     }
   }, [isStarted]);
 

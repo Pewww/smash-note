@@ -2,6 +2,7 @@ import {createGlobalStyle} from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
+    // 폰트 에러 해결 필요
     font-family: 'Edo';
     src: url('../assets/fonts/Edo.ttf');
   }
@@ -11,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
   }
 
   button {
