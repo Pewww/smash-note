@@ -4,6 +4,8 @@ import {INoteInfo, TGameStatus} from '../../@types/game';
 import {createStage} from '../../lib/game';
 import ScoreNote from './Note/Score';
 import TrapNote from './Note/Trap';
+import TimeNote from './Note/Time';
+import FeverNote from './Note/Fever';
 import Score from './Game/Score';
 import isEmpty from 'lodash.isempty';
 import Direction from './Direction';
@@ -12,10 +14,12 @@ import {
   DECREASE_TIME_DEGREE,
   DEFAULT_TIME_LIMIT,
   SCORE_DEGREE,
-  PLUS_TIME_SCORE
+  PLUS_TIME_SCORE,
+  INCREASE_TIME_DEGREE
 } from '../../constants/game';
 import Time from './Game/Time';
 import {SECOND} from '../../constants/times';
+import {Dig} from '../../@types/helper';
 
 const StyledStage = styled.div`
   padding-top: 120px;
@@ -51,6 +55,16 @@ const StyledStage = styled.div`
   }
 `;
 
+const compByStatus = (status: Dig<INoteInfo, 'status'>, key: string) => {
+  const COMP_BY_STATUS = {
+    normal: <ScoreNote key={key}/>,
+    fever: <FeverNote key={key}/>,
+    time: <TimeNote key={key}/>
+  };
+
+  return COMP_BY_STATUS[status];
+};
+
 const Stage = () => {
   const [stage, setStage] = useState<INoteInfo[][]>(null);
   const [gameStatus, setGameStatus] = useState<TGameStatus>(null);
@@ -66,7 +80,7 @@ const Stage = () => {
     const lastNode = stage[lastIndex];
     const {
       pressable,
-      isFeverTime // status로 비교해보자 normal, fever, time?
+      status
     } = lastNode[direction];
 
     if (gameStatus === 'over') {
@@ -74,13 +88,25 @@ const Stage = () => {
     }
 
     if (pressable) {
-      if (isFeverTime) {
-        // Do something
+      switch(status) {
+        case 'time': {
+          gameStatus === null && setGameStatus('start');
+          setLeftTime(curr => curr + INCREASE_TIME_DEGREE);
+          break;
+        }
+        case 'fever': {
+          // + 일정 시간 동안 시간이 감소되지 않음
+          setScore(curr => curr += SCORE_DEGREE.fever);
+          break;
+        }
+        case 'normal': {
+          gameStatus === null && setGameStatus('start');
+          setScore(curr => curr += SCORE_DEGREE.normal);
+          break;
+        }
       }
 
-      gameStatus === null && setGameStatus('start');
       setStage(curr => curr.slice(0, lastIndex));
-      setScore(curr => curr += SCORE_DEGREE.normal);
     } else {
       gameStatus === 'start' && setLeftTime(curr =>
         curr - DECREASE_TIME_DEGREE
@@ -89,7 +115,7 @@ const Stage = () => {
   };
 
   useEffect(() => {
-    setStage(createStage());
+    setStage(createStage() as INoteInfo[][]);
 
     return () => {
       clearInterval(intervalRef.current);
@@ -116,7 +142,7 @@ const Stage = () => {
       setStage(curr => ([
         ...createStage(),
         ...curr
-      ]));
+      ]) as INoteInfo[][]);
     }
   }, [score]);
 
@@ -133,17 +159,15 @@ const Stage = () => {
               key={index}
             >
               {_stage.map(({
-                isFeverTime,
-                pressable,
-                // 추가 정보들
+                status,
+                pressable
               }) => {
                 const key = `${index}-${pressable}`;
 
                 return (
                   pressable ? (
-                    <ScoreNote key={key}/>
+                    compByStatus(status, key)
                   ) : (
-                    // 추후 이런저런 기능 추가할 때 다시 살펴보기
                     <TrapNote key={`${index}-${pressable}`}/>
                   )
                 );

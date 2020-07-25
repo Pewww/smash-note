@@ -1,6 +1,6 @@
 export interface INoteInfo {
   pressable: boolean;
-  isFeverTime: boolean;
+  status: 'normal' | 'fever' | 'time';
 }
 
 export type TGameStatus = null | 'start' | 'over';
