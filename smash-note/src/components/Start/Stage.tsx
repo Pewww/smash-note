@@ -18,20 +18,20 @@ import Time from './Game/Time';
 import {SECOND} from '../../constants/times';
 
 const StyledStage = styled.div`
-  padding-top: 100px;
+  padding-top: 120px;
 
   .notes-wrapper {
     text-align: center;
 
     &:nth-child(8) button {
-      margin: -25px 0 0 0;
+      margin: -45px 0 0 0;
 
       &:first-child {
-        margin-right: 10px;
+        margin-right: 30px;
       }
 
       &:last-child {
-        margin-left: 10px;
+        margin-left: 30px;
       }
 
       img {
@@ -41,11 +41,11 @@ const StyledStage = styled.div`
 
     button {
       &:first-child {
-        margin-right: 50px;
+        margin-right: 80px;
       }
 
       &:last-child {
-        margin-left: 50px;
+        margin-left: 80px;
       }
     }
   }

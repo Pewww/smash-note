@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styled, {keyframes} from 'styled-components';
 import {$MAIN_BACKGROUND, $WHITE} from '../../styles/variables.styles';
-import {centerMixin, horizontalCenterMixin} from '../../styles/mixins.styles';
+import {centerMixin} from '../../styles/mixins.styles';
 import {SECOND} from '../../constants/times';
 import {RouteComponentProps} from 'react-router-dom';
 
@@ -48,8 +48,9 @@ const loadingAnimation = keyframes`
 `;
 
 const LoadingBar = styled.div`
-  ${horizontalCenterMixin()};
-  margin-top: 100px;
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(60px);
   height: 14px;
   background-color: ${$MAIN_BACKGROUND};
   animation: ${loadingAnimation} .5s 1s forwards;
