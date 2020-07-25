@@ -1,13 +1,14 @@
 import React, {memo} from 'react';
 import styled from 'styled-components';
-import {$WHITE} from '../../styles/variables.styles';
-import numberWithCommas from '../../lib/numberWithCommas';
-import {horizontalCenterMixin} from '../../styles/mixins.styles';
+import {$WHITE} from '../../../styles/variables.styles';
+import numberWithCommas from '../../../lib/numberWithCommas';
+import {horizontalCenterMixin} from '../../../styles/mixins.styles';
 
 const StyledScore = styled.div`
   top: 30px;
   ${horizontalCenterMixin()};
   text-align: center;
+  font-size: 26px;
 
   span {
     color: ${$WHITE};
