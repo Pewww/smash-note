@@ -1,9 +1,25 @@
 import React, {useState, useEffect} from 'react';
 import styled, {keyframes} from 'styled-components';
-import {$MAIN_BACKGROUND} from '../../styles/variables.styles';
-import {centerMixin} from '../../styles/mixins.styles';
+import {$MAIN_BACKGROUND, $WHITE} from '../../styles/variables.styles';
+import {centerMixin, horizontalCenterMixin} from '../../styles/mixins.styles';
 import {SECOND} from '../../constants/times';
 import {RouteComponentProps} from 'react-router-dom';
+
+const testAnimation = keyframes`
+  0% {
+    opacity: 0;
+    letter-spacing: 0;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    letter-spacing: 3px;
+  }
+`;
 
 const StyledMain = styled.div`
   position: relative;
@@ -14,8 +30,47 @@ const StyledMain = styled.div`
   align-items: center;
 
   button {
-    font-size: 40px;
+    font-size: 60px;
     color: ${$MAIN_BACKGROUND};
+    opacity: 0;
+    animation: ${testAnimation} .8s 1.75s forwards;
+  }
+`;
+
+const loadingAnimation = keyframes`
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 200px;
+  }
+`;
+
+const LoadingBar = styled.div`
+  ${horizontalCenterMixin()};
+  margin-top: 100px;
+  height: 14px;
+  background-color: ${$MAIN_BACKGROUND};
+  animation: ${loadingAnimation} .5s 1s forwards;
+
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: ${$WHITE};
+    transform: rotate(-70deg);
+  }
+
+  &:before {
+    top: -5px;
+    left: -13px;
+  }
+
+  &:after {
+    top: -1px;
+    right: -5px;
   }
 `;
 
@@ -61,6 +116,7 @@ const Main: React.FC<Props> = ({history}) => {
       <button onClick={onClickStartBtn}>
         START
       </button>
+      <LoadingBar/>
       {isStarted && (
         <ExpandingSpace/>
       )}
