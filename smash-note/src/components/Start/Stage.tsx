@@ -15,19 +15,25 @@ import {
   DEFAULT_TIME_LIMIT,
   SCORE_DEGREE,
   PLUS_TIME_SCORE,
-  INCREASE_TIME_DEGREE
+  INCREASE_TIME_DEGREE,
+  COMBO_FOR_FEVER_TIME
 } from '../../constants/game';
 import Time from './Game/Time';
+import Combo from './Game/Combo';
 import {SECOND} from '../../constants/times';
 import {Dig} from '../../@types/helper';
 
-const StyledStage = styled.div`
+const StyledStage = styled.div<{hasCombo: boolean;}>`
   padding-top: 120px;
 
   .notes-wrapper {
     text-align: center;
 
-    &:nth-child(8) button {
+    /* @TODO: last-child로 수정하기 */
+    &:nth-child(${({hasCombo}) => hasCombo
+      ? 9
+      : 8
+    }) button {
       margin: -45px 0 0 0;
 
       &:first-child {
@@ -70,6 +76,8 @@ const Stage = () => {
   const [gameStatus, setGameStatus] = useState<TGameStatus>(null);
   const [score, setScore] = useState(0);
   const [leftTime, setLeftTime] = useState(DEFAULT_TIME_LIMIT);
+  const [isFeverTime, setIsFeverTime] = useState(false);
+  const [combo, setCombo] = useState(0);
 
   const intervalRef: React.MutableRefObject<number> = useRef(null);
 
@@ -95,7 +103,6 @@ const Stage = () => {
           break;
         }
         case 'fever': {
-          // + 일정 시간 동안 시간이 감소되지 않음
           setScore(curr => curr += SCORE_DEGREE.fever);
           break;
         }
@@ -107,10 +114,12 @@ const Stage = () => {
       }
 
       setStage(curr => curr.slice(0, lastIndex));
+      setCombo(curr => curr + 1);
     } else {
-      gameStatus === 'start' && setLeftTime(curr =>
-        curr - DECREASE_TIME_DEGREE
-      );
+      if (gameStatus === 'start') {
+        setLeftTime(curr => curr - DECREASE_TIME_DEGREE);
+        combo !== 0 && setCombo(0);
+      }
     }
   };
 
@@ -138,20 +147,36 @@ const Stage = () => {
   }, [leftTime]);
 
   useEffect(() => {
-    if (score !== 0 && score % PLUS_TIME_SCORE === 0) {
-      setStage(curr => ([
-        ...createStage(),
-        ...curr
-      ]) as INoteInfo[][]);
+    if (score !== 0) {
+      if (isFeverTime) {
+        setStage(curr => ([
+          ...curr,
+          ...createStage(true)
+        ]) as INoteInfo[][]);
+
+        setIsFeverTime(false);
+      } else {
+        score % PLUS_TIME_SCORE === 0 && setStage(curr => ([
+          ...createStage(),
+          ...curr
+        ]) as INoteInfo[][]);
+      }
     }
-  }, [score]);
+  }, [score, isFeverTime]);
+
+  useEffect(() => {
+    // 임시 조건 설정
+    if (combo > 0 && combo % COMBO_FOR_FEVER_TIME === 0) {
+      setIsFeverTime(true);
+    }
+  }, [combo]);
 
   return (
-    <StyledStage>
+    <StyledStage hasCombo={combo > 0}>
       {!isEmpty(stage) && (
         <>
           <Score score={score}/>
-          {/* <div style={{color: 'white'}}>피버게이지: {}</div> */}
+          <Combo combo={combo}/>
           <Time time={leftTime <= 0 ? 0 : leftTime}/>
           {stage.slice(stageLeng - MAX_NOTE_SHOW_COUNT, stageLeng).map((_stage, index) => (
             <div
@@ -159,19 +184,16 @@ const Stage = () => {
               key={index}
             >
               {_stage.map(({
+                id,
                 status,
                 pressable
-              }) => {
-                const key = `${index}-${pressable}`;
-
-                return (
-                  pressable ? (
-                    compByStatus(status, key)
-                  ) : (
-                    <TrapNote key={`${index}-${pressable}`}/>
-                  )
-                );
-              })}
+              }) => (
+                pressable ? (
+                  compByStatus(status, id)
+                ) : (
+                  <TrapNote key={id}/>
+                )
+              ))}
             </div>
           ))}
           <Direction

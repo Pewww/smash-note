@@ -5,7 +5,6 @@ import rightArrow from '../../../assets/icons/icon-right.png';
 
 const StyledDirection = styled.div`
   text-align: center;
-  touch-action: manipulation;
 
   img {
     width: 90px; 
