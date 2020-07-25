@@ -1,16 +1,11 @@
 import React, {memo} from 'react';
 import styled from 'styled-components';
 import okIcon from '../../../assets/icons/icon-ok.png';
-import {$MAIN_BACKGROUND, $WHITE, $SCORE_NOTE_BACKGROUND} from '../../../styles/variables.styles';
+import {$SCORE_NOTE_BACKGROUND} from '../../../styles/variables.styles';
+import {StyledNote} from './styles/note.styles';
 
-const StyledScoreNote = styled.button`
-  padding: 8px 8px 5px 8px;
+const StyledScoreNote = styled(StyledNote)`
   background-color: ${$SCORE_NOTE_BACKGROUND};
-  border-radius: 10px;
-
-  img {
-    width: 40px;
-  }
 `;
 
 const ScoreNote = () => {

@@ -2,15 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import deathIcon from '../../../assets/icons/icon-death.png';
 import {$WHITE} from '../../../styles/variables.styles';
+import {StyledNote} from './styles/note.styles';
 
-const StyledTrapNote = styled.button`
-  padding: 8px 8px 5px 8px;
+const StyledTrapNote = styled(StyledNote)`
   background-color: ${$WHITE};
-  border-radius: 10px;
-
-  img {
-    width: 40px;
-  }
 `;
 
 const TrapNote = () => (
