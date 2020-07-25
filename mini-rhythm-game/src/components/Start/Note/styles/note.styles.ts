@@ -6,6 +6,6 @@ export const StyledNote = styled.button`
   margin-bottom: 10px;
 
   img {
-    width: 40px;
+    width: 46px;
   }
 `;

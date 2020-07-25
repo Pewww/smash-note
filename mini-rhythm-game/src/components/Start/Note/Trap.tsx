@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import styled from 'styled-components';
 import deathIcon from '../../../assets/icons/icon-death.png';
 import {$WHITE} from '../../../styles/variables.styles';
@@ -17,4 +17,4 @@ const TrapNote = () => (
   </StyledTrapNote>
 );
 
-export default TrapNote;
+export default memo(TrapNote);

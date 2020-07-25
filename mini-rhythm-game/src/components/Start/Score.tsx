@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import styled from 'styled-components';
 import {$WHITE} from '../../styles/variables.styles';
 import numberWithCommas from '../../lib/numberWithCommas';
@@ -7,6 +7,7 @@ import {horizontalCenterMixin} from '../../styles/mixins.styles';
 const StyledScore = styled.div`
   top: 30px;
   ${horizontalCenterMixin()};
+  text-align: center;
 
   span {
     color: ${$WHITE};
@@ -30,4 +31,4 @@ const Score: React.FC<Props> = ({score}) => (
   </StyledScore>
 );
 
-export default Score;
+export default memo(Score);
