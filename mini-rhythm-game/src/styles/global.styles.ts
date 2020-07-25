@@ -1,12 +1,6 @@
 import {createGlobalStyle} from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  @font-face {
-    // 폰트 에러 해결 필요
-    font-family: 'Edo';
-    src: url('../assets/fonts/Edo.ttf');
-  }
-
   html, body {
     width: 100%;
     height: 100%;
@@ -26,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   * {
-    font-family: 'Edo';
+    font-family: 'Jockey One';
   }
 `;
 
