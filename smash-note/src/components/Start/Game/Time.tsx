@@ -5,7 +5,7 @@ import {$WHITE} from '../../../styles/variables.styles';
 const StyledTime = styled.div`
   position: absolute;
   top: 40px;
-  left: 20px;
+  right: 20px;
 
   span {
     color: ${$WHITE};

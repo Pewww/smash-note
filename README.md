@@ -41,17 +41,17 @@
 
 ## 인게임
 
-### 1. 메인화면
+### 1. 시작화면
 
 <img src="https://user-images.githubusercontent.com/23455736/88460183-56edc380-ced5-11ea-83fa-410529377247.png" alt="메인화면" width="360">
 
 ### 2-1. 게임화면
 
-<img src="https://user-images.githubusercontent.com/23455736/88460205-94eae780-ced5-11ea-99fc-647bc80116ed.png" alt="게임화면" width="360">
+<img src="https://user-images.githubusercontent.com/23455736/88473551-92ca6c80-cf59-11ea-98a6-6375a94db856.png" alt="게임화면" width="360">
 
 ### 2-2. 게임화면 (피버타임)
 
-<img src="https://user-images.githubusercontent.com/23455736/88460222-b8ae2d80-ced5-11ea-9bb3-5b6acf52be55.png" alt="게임화면 (피버타임)" width="360">
+<img src="https://user-images.githubusercontent.com/23455736/88473554-af66a480-cf59-11ea-8ccd-1bee3eb12c9b.png" alt="게임화면 (피버타임)" width="360">
 
 ### 3. 랭킹화면
 

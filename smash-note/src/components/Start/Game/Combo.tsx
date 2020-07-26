@@ -5,7 +5,7 @@ import numberWithCommas from '../../../lib/numberWithCommas';
 
 const StyledCombo = styled.div`
   position: absolute;
-  top: 70px;
+  top: 85px;
   left: 20px;
 
   span {
