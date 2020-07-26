@@ -7,3 +7,8 @@ export interface INoteInfo {
 }
 
 export type TGameStatus = null | 'start' | 'over';
+
+export interface IRank {
+  score: number,
+  date: string;
+}

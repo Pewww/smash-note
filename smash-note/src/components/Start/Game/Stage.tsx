@@ -1,14 +1,14 @@
 import React, {useEffect, useState, useMemo, useRef} from 'react';
 import styled from 'styled-components';
-import {INoteInfo, TGameStatus, TNoteStatus} from '../../@types/game';
-import {createStage} from '../../lib/game';
-import ScoreNote from './Note/Score';
-import TrapNote from './Note/Trap';
-import TimeNote from './Note/Time';
-import FeverNote from './Note/Fever';
-import Score from './Game/Score';
+import {INoteInfo, TGameStatus, TNoteStatus} from '../../../@types/game';
+import {createStage} from '../../../lib/game';
+import ScoreNote from '../Note/Score';
+import TrapNote from '../Note/Trap';
+import TimeNote from '../Note/Time';
+import FeverNote from '../Note/Fever';
+import Score from './Score';
 import isEmpty from 'lodash.isempty';
-import Direction from './Direction';
+import Direction from '../Direction';
 import {
   MAX_NOTE_SHOW_COUNT,
   DECREASE_TIME_DEGREE,
@@ -19,24 +19,21 @@ import {
   GAUGE_FOR_FEVER_TIME,
   COMBO_TO_INCREASE_GAUGE,
   INCREASE_GAUGE_DEGREE
-} from '../../constants/game';
-import Time from './Game/Time';
-import Combo from './Game/Combo';
-import {SECOND} from '../../constants/times';
-import Gauge from './Game/Gauge';
-import usePrevious from '../../hooks/usePrevious';
+} from '../../../constants/game';
+import Time from './Time';
+import Combo from './Combo';
+import {SECOND} from '../../../constants/times';
+import Gauge from './Gauge';
+import usePrevious from '../../../hooks/usePrevious';
+import RankPopup from './Rank/Popup';
 
-const StyledStage = styled.div<{hasCombo: boolean;}>`
+const StyledStage = styled.div`
   padding-top: 140px;
 
   .notes-wrapper {
     text-align: center;
 
-    /* @TODO: last-child로 수정하기 */
-    &:nth-child(${({hasCombo}) => hasCombo
-      ? 10
-      : 9
-    }) button {
+    &.last-note button {
       margin: -45px 0 0 0;
 
       &:first-child {
@@ -218,7 +215,7 @@ const Stage = () => {
   }, [gauge]);
 
   return (
-    <StyledStage hasCombo={combo > 0}>
+    <StyledStage>
       {!isEmpty(stage) && (
         <>
           <Score score={score}/>
@@ -227,7 +224,10 @@ const Stage = () => {
           <Time time={leftTime <= 0 ? 0 : leftTime}/>
           {stage.slice(stageLeng - MAX_NOTE_SHOW_COUNT, stageLeng).map((_stage, index) => (
             <div
-              className="notes-wrapper"
+              className={`notes-wrapper ${index === MAX_NOTE_SHOW_COUNT - 1
+                ? 'last-note'
+                : ''
+              }`}
               key={index}
             >
               {_stage.map(({
@@ -247,6 +247,9 @@ const Stage = () => {
             onLeftClick={onClickDirectionKey}
             onRightClick={onClickDirectionKey}
           />
+          {gameStatus === 'over' && (
+            <RankPopup score={score}/>
+          )}
         </>
       )}
     </StyledStage>

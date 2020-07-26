@@ -1,5 +1,6 @@
-import {DEFAULT_NOTE_COUNT, DEFAULT_NOTE_INFO} from '../constants/game';
+import {DEFAULT_NOTE_COUNT, DEFAULT_NOTE_INFO, SAVE_RANK_MAX_LENGTH} from '../constants/game';
 import {getRandomNumber, getRandomId} from './random';
+import {getTime} from './date';
 
 export const createStage = (isFeverTime?: boolean) =>
   Array.from(new Array(DEFAULT_NOTE_COUNT), () => {
@@ -47,3 +48,20 @@ export const createStage = (isFeverTime?: boolean) =>
       return note;
     }
   });
+
+export const saveScoreToRank = (score: number) => {
+  const currTime = getTime();
+  const data = {
+    date: currTime,
+    score
+  };
+  const existingData = JSON.parse(localStorage.getItem('smash-note')) || [];
+
+  const filteredData = [...existingData, data]
+    .sort((a, b) => b.score - a.score)
+    .slice(0, SAVE_RANK_MAX_LENGTH);
+
+  localStorage.setItem('smash-note', JSON.stringify(filteredData));
+
+  return filteredData;
+};

@@ -33,7 +33,9 @@ interface Props {
 }
 
 const Gauge: React.FC<Props> = ({gauge}) => {
-  const _gauge = ((gauge || 1) / GAUGE_FOR_FEVER_TIME);
+  const _gauge = gauge
+    ? (gauge / GAUGE_FOR_FEVER_TIME)
+    : 0;
 
   return (
     <Wrapper>
