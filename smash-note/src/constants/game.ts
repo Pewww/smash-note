@@ -1,6 +1,6 @@
 // @TODO: 정리하기
 
-export const DEFAULT_TIME_LIMIT = 3; // 시간 제한
+export const DEFAULT_TIME_LIMIT = 30; // 시간 제한
 export const DEFAULT_NOTE_COUNT = 50; // 노트 기본 수
 
 export const MAX_NOTE_SHOW_COUNT = 6; // 한 번에 보여지는 노트 수
