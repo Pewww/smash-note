@@ -55,5 +55,7 @@
 
 ### 3. 랭킹화면
 
+<img src="https://user-images.githubusercontent.com/23455736/88478918-dedfd600-cf86-11ea-9701-d5f948cd2588.png" alt="랭킹화면" width="360">
+
 ## 기타
 [집행검 키우기](https://play.google.com/store/apps/details?id=me.nextdoors.WK&hl=ko)에 영감을 받아 제작하였습니다! 🙏
