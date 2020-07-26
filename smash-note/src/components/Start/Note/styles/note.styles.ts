@@ -9,9 +9,15 @@ export const StyledNote = styled.button`
     width: 46px;
   }
 
-  @media all and (max-height: 710px) {
+  @media all and (max-height: 720px) {
     img {
       width: 40px;
+    }
+  }
+
+  @media all and (max-height: 640px) {
+    img {
+      width: 32px;
     }
   }
 `;

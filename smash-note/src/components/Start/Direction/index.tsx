@@ -19,10 +19,17 @@ const StyledDirection = styled.div`
     }
   }
 
-  @media all and (max-height: 710px) {
+  @media all and (max-height: 720px) {
     img {
       width: 70px;
       padding: 35px;
+    }
+  }
+
+  @media all and (max-height: 640px) {
+    img {
+      width: 60px;
+      padding: 25px;
     }
   }
 `;

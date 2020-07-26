@@ -48,9 +48,15 @@ const StyledStage = styled.div`
         width: 58px;
       }
 
-      @media all and (max-height: 710px) {
+      @media all and (max-height: 720px) {
         img {
           width: 52px;
+        }
+      }
+
+      @media all and (max-height: 640px) {
+        img {
+          width: 44px;
         }
       }
     }

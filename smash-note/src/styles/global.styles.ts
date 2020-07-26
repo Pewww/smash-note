@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     font-family: 'Jockey One';
+    touch-action: manipulation;
   }
 `;
 

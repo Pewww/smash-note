@@ -57,5 +57,18 @@
 
 <img src="https://user-images.githubusercontent.com/23455736/88478918-dedfd600-cf86-11ea-9701-d5f948cd2588.png" alt="랭킹화면" width="360">
 
+## 모바일 게임 방법 (임시)
+
+```
+1. cd smash-note
+
+2. yarn
+
+3. yarn start
+
+4. 로컬 서버를 실행하고 있는 기기와 같은 네트워크를 연결한 후, 기기의 IP를 통해 접속한다.
+Ex. IP 주소가 192.168.35.79라면 http://192.168.35.79:3000로 접속!
+```
+
 ## 기타
 [집행검 키우기](https://play.google.com/store/apps/details?id=me.nextdoors.WK&hl=ko)에 영감을 받아 제작하였습니다! 🙏
