@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     overflow: hidden;
     touch-action: manipulation;
+    user-select: none;
   }
 
   button {
@@ -22,7 +23,6 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     font-family: 'Jockey One';
-    touch-action: manipulation;
   }
 `;
 
