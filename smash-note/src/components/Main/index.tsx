@@ -5,7 +5,7 @@ import {centerMixin} from '../../styles/mixins.styles';
 import {SECOND} from '../../constants/times';
 import {RouteComponentProps} from 'react-router-dom';
 
-const testAnimation = keyframes`
+const textAnimation = keyframes`
   0% {
     opacity: 0;
     letter-spacing: 0;
@@ -33,7 +33,7 @@ const StyledMain = styled.div`
     font-size: 60px;
     color: ${$MAIN_BACKGROUND};
     opacity: 0;
-    animation: ${testAnimation} .8s 1.75s forwards;
+    animation: ${textAnimation} .8s 1.75s forwards;
   }
 `;
 
