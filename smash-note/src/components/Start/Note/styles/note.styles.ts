@@ -8,4 +8,10 @@ export const StyledNote = styled.button`
   img {
     width: 46px;
   }
+
+  @media all and (max-height: 710px) {
+    img {
+      width: 40px;
+    }
+  }
 `;

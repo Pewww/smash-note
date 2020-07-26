@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import styled from 'styled-components';
 import leftArrow from '../../../assets/icons/icon-left.png';
 import rightArrow from '../../../assets/icons/icon-right.png';
@@ -16,6 +16,13 @@ const StyledDirection = styled.div`
 
     &:last-child {
       padding-right: 0;
+    }
+  }
+
+  @media all and (max-height: 710px) {
+    img {
+      width: 70px;
+      padding: 35px;
     }
   }
 `;
@@ -43,4 +50,4 @@ const Direction: React.FC<Props> = ({
   </StyledDirection>
 );
 
-export default Direction;
+export default memo(Direction);

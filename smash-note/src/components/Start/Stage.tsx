@@ -50,6 +50,12 @@ const StyledStage = styled.div<{hasCombo: boolean;}>`
       img {
         width: 58px;
       }
+
+      @media all and (max-height: 710px) {
+        img {
+          width: 52px;
+        }
+      }
     }
 
     button {
